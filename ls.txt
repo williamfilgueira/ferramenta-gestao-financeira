@@ -1,0 +1,36 @@
+
+
+
+
+2 - ANÁLISE DE REQUISITOS 
+
+Quando um potencial cliente entra em contato com uma empresa de desenvolvimento 
+software é realizado o processo de análise de requisitos, esta etapa é o procedimento
+que levanta as necessidades do software em sí onde podemos estabelecer prioridades
+sobre as funções e caracterísicas do sistema.
+
+A análise é indispensável para a construção do software pois todas as condições e funções precisam ser
+detalhadas. Por exemplo, o cliente faz uma requisição onde não é possível atender o que o mesmo deseja
+pois sofwares para navegadores tem funcionalidades diferentes de uma aplicação mobile ou desktop, neste cenário é 
+preciso compreender a solicitação e viabilizar diferentes tipos de ideias para poder sanar este empecilho, pois a falta dos 
+requisitos custam retrabalho com código, tempo e capital as empresas.
+
+Assim podemos definir que e é de grande importancia para o projeto já que este processo é o que dará 
+referência para o software ir para produção, diminuindo assim o risco de bugs ou até mesmo falta de funcionalidades
+na entrega do projeto.
+
+3 - O que são requisitos funcionais e requisitos não funcionais?
+
+Requisitos funcionais - São funcões especificas que o software precisa ter para cumprir seu objetivo, ações que 
+o cliente espera que o sistema realize para atender as necessidades do usuário do sistema. 
+exemplos: Diferentes permissões;
+Troca de informações;
+Tipos de dados armazenados;
+Ações que facilitam os processos;
+
+Requisitos não-funcionais - Estão interligados com à manutençã, performace e segurança do software eles já são implícitos e não
+precisam ser solicitados pelo cliente.
+exemplos: Usabilidade;
+Ambiente de segurança;
+Prevenção de falhas e erros;
+Velocidade de processamento;
