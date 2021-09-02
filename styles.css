@@ -1,8 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi:wght@400;500&family=Roboto:wght@400;500;700&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,700;1,500&display=swap');
 :root {
   --dark-blue: #363f5f;
-  --green: #3ac508;
+  --green: #49aa26;
   --lightgreen: #8efa66;
   --red: rgb(235, 0, 0);
 }
@@ -19,7 +18,7 @@ html {
 
 body {
   background: #f0f2f5;
-  font-family: "Kaisei HarunoUmi", serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .sr-only {
@@ -54,6 +53,7 @@ h2 {
 button {
   width: 100%;
   height: 50px;
+  font-weight: 700;
 
   border: none;
   border-radius: 0.25rem;
@@ -70,13 +70,17 @@ button:hover {
 .button.new {
   display: inline-block;
   margin-bottom: 0.8rem;
+  margin-left: 5px;
+}
+.button.new:hover{
+  transform: scale(1.1);
 }
 
 .button.cancel {
-  color: var(--red);
-  font-weight: 600;
+  color: white;
+
+  font-weight: 700;
   background: var(--red);
-  border: 2px var(--red) solid;
   border-radius: 0.25rem;
 
   height: 50px;
@@ -86,19 +90,27 @@ button:hover {
   justify-content: center;
   opacity: 1;
 }
+.button.cancel:hover {
+  background-color: rgb(212, 4, 4);
+}
+
+
+
 a {
+  margin-left: 5px;
   color: var(--green);
   text-decoration: none;
+  transition: 0.3s;
 }
 
 a:hover {
   color: var(--green);
-  background: var(--lightgreen);
 }
 
 /* HEADER */
 header {
-  background: #2d4a22;
+  flex: 1 1 auto;
+  background: #195479;
   padding: 2rem 0;
   text-align: center;
 }
@@ -106,7 +118,7 @@ header {
 #logo {
   color: #fff;
   font-weight: 100;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
 }
 
 /* FIM HEADER */
@@ -278,12 +290,25 @@ input {
 /* FOOTER */
 footer {
   text-align: center;
-  padding: 4rem 0 2rem;
+  padding: 4rem 0 0rem;
   color: var(--dark-blue);
   opacity: 0.6;
 }
 
 /* FIM FOOTER */
+.container-img {
+  height: 11rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-image: url("./assets/bank.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#img-bank {
+  height: 11rem;
+}
 
 /* RESPONSIVE */
 
@@ -296,5 +321,24 @@ footer {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
+  }
+}
+
+@media (max-width: 450px) {
+  #logo {
+    height: 4.9rem;
+    transform: 1.5s;
+  }
+}
+@media (max-width: 375px) {
+  #logo {
+    height: 4.5rem;
+    transform: 1.5s;
+  }
+}
+@media (max-width: 320px) {
+  #logo {
+    height: 4rem;
+    transform: 1.5s;
   }
 }

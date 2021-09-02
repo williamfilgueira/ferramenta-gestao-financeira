@@ -9,7 +9,7 @@
   </head>
   <body>
     <header>
-      <img id="logo" src="./assets/logo.svg" alt="Logo finanças" />
+      <img id="logo" src="./assets/newLogo.svg" alt="Logo finanças" />
     </header>
 
     <main class="container">
@@ -21,7 +21,7 @@
             <span> Entradas </span>
             <img src="./assets/income.svg" alt="imagem de entradas" />
           </h3>
-          <p id="incomeDisplay">R$5.000,00</p>
+          <p id="incomeDisplay">$0,00</p>
         </div>
 
         <div class="card">
@@ -29,20 +29,20 @@
             <span>Saídas</span>
             <img src="./assets/expense.svg" alt="imagem de saídas" />
           </h3>
-          <p id="expensesDisplay">R$3.000,00</p>
+          <p id="expensesDisplay">R$0,00</p>
         </div>
         <div class="card total">
           <h3>
             <span> Total</span>
             <img src="./assets/total.svg" alt="imagem total" />
           </h3>
-          <p id="totalDisplay">R$2.000,00</p>
+          <p id="totalDisplay">$0,00</p>
         </div>
       </section>
 
       <section id="transaction">
         <h2 class="sr-only">Transações</h2>
-        <a href="#" class="button new" onclick="Modal.open()"
+        <a id="new-transaction" href="#" class="button new" onclick="Modal.open()"
           >+ Nova transação</a
         >
         <table id="data-table">
@@ -55,9 +55,7 @@
             </tr>
           </thead>
 
-          <tbody>
-          
-          </tbody>
+          <tbody></tbody>
         </table>
       </section>
     </main>
@@ -68,7 +66,7 @@
         <div class="modal-content">
           <div id="form">
             <h2>Nova transação</h2>
-            <form action="#">
+            <form action="" onsubmit="Form.submit(event)">
               <div class="input-group">
                 <label class="sr-only" for="description"></label>
                 <input
@@ -104,9 +102,9 @@
               </div>
 
               <div class="input-group actions">
-                <a class="button cancel" 
-                onclick="Modal.close()"
-                href="#">Cancelar</a>
+                <a class="button cancel" onclick="Modal.close()" href="#"
+                  >Cancelar</a
+                >
                 <button>Salvar</button>
               </div>
             </form>
@@ -119,6 +117,9 @@
     <footer>
       <p>Fincança$$</p>
     </footer>
+    <div class="container-img">
+      <!-- <img id="img-bank" src="./assets/bank.svg" alt="img back" /> -->
+    </div>
     <script src="./scripts.js"></script>
   </body>
 </html>

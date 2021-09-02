@@ -7,42 +7,30 @@ const Modal = {
   },
 };
 
-// array de objetos
-const transactions = [
-  {
-    id: 1,
-    descriition: "Luz",
-    amount: -50000,
-    date: "23/02/2021",
+const Storage ={
+  get(){
+    return JSON.parse(localStorage.getItem("transactions")) || []
   },
-  {
-    id: 2,
-    descriition: "Criação web site",
-    amount: 500000,
-    date: "23/02/2021",
-  },
-  {
-    id: 3,
-    descriition: "Internet",
-    amount: -20000,
-    date: "23/02/2021",
-  },
-  {
-    id: 4,
-    descriition: "Services",
-    amount: 300000,
-    date: "29/02/2021",
-  },
-];
+
+  set(transactions){
+    localStorage.setItem("transactions", JSON.stringify(transactions))
+  }
+}
 
 // funções de entradas, saídas e total
 
 const Transaction = {
-  all: transactions,
+  all: Storage.get(),
 
-  add(transaction){
+  add(transaction) {
     Transaction.all.push(transaction);
-    console.log(Transaction.all)
+    App.reload();
+  },
+
+  //metodo para remover um valor  ************
+  remove(index) {
+    Transaction.all.splice(index, 1);
+    App.reload();
   },
 
   incomes() {
@@ -79,21 +67,22 @@ const DOM = {
 
   addTransaction(transaction, index) {
     const tr = document.createElement("tr");
-    tr.innerHTML = DOM.innerHTMLTransaction(transaction);
+    tr.innerHTML = DOM.innerHTMLTransaction(transaction, index);
+    tr.dataset.index = index
     DOM.transactionContainer.appendChild(tr);
   },
 
-  innerHTMLTransaction(transaction) {
+  innerHTMLTransaction(transaction, index) {
     const CSSclass = transaction.amount > 0 ? "income" : "expense";
 
     const amount = Utils.formatCurrency(transaction.amount);
 
     const html = `
-              <td class="description">${transaction.descriition}</td>
+              <td class="description">${transaction.description}</td>
               <td class="${CSSclass}">${amount}</td>
               <td class="date">${transaction.date}</td>
               <td>
-                <img src="./assets/minus.svg" alt="remover transação" />
+                <img onClick="Transaction.remove(${index})" src="./assets/minus.svg" alt="remover transação" />
               </td>
     `;
     return html;
@@ -111,10 +100,25 @@ const DOM = {
       Transaction.total()
     );
   },
+
+  clearTransactions() {
+    DOM.transactionContainer.innerHTML = "";
+  },
 };
 
-//conversor de casas decimais e moeda
+//conversor de casas decimais e moeda e datas
 const Utils = {
+  // formatando a data
+  formatDate(date) {
+    const splittedDate = date.split("-");
+    return `${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}`;
+  },
+
+  formatAmount(value) {
+    value = value * 100;
+    return Math.round(value)
+  },
+
   formatCurrency(value) {
     const signal = Number(value) < 0 ? "-" : "";
 
@@ -131,12 +135,86 @@ const Utils = {
   },
 };
 
+const Form = {
+  description: document.querySelector("input#description"),
+  amount: document.querySelector("input#amount"),
+  date: document.querySelector("input#date"),
 
+  getValues() {
+    return {
+      description: Form.description.value,
+      amount: Form.amount.value,
+      date: Form.date.value,
+    };
+  },
 
+  // validando campos do form
+  validateFilds() {
+    //desestruturando o objeto que vem do formulario
+    const { description, amount, date } = Form.getValues();
+    if (
+      description.trim() === "" ||
+      amount.trim() === "" ||
+      date.trim() === ""
+    ) {
+      throw new Error("Por favor, preencha todos os campos");
+    }
+  },
 
-transactions.forEach(function (transaction) {
-  DOM.addTransaction(transaction);
-});
+  formatValues() {
+    let { description, amount, date } = Form.getValues();
 
-DOM.updateBalance();
+    amount = Utils.formatAmount(amount);
 
+    date = Utils.formatDate(date);
+
+    return {
+      description,
+      amount,
+      date,
+    };
+  },
+
+  clearFields() {
+    Form.description.value = "";
+    Form.amount.value = "";
+    Form.date.value = "";
+  },
+
+  submit(event) {
+    event.preventDefault();
+
+    try {
+      Form.validateFilds();
+      const transaction = Form.formatValues();
+
+      Transaction.add(transaction);
+
+      Form.clearFields();
+
+      Modal.close();
+      
+    } catch (error) {
+      alert(error.message);
+    }
+  },
+};
+
+//iniciando o app e add as transações em tela
+const App = {
+  init() {
+    Transaction.all.forEach((transaction,index) => {
+      DOM.addTransaction(transaction, index);
+    });
+
+    DOM.updateBalance();
+    Storage.set(Transaction.all)
+  },
+
+  reload() {
+    DOM.clearTransactions();
+    App.init();
+  },
+};
+
+App.init();
